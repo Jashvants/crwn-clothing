@@ -3,6 +3,7 @@ import Directory from './Component/Menu/directory.component';
 
 import './categories.styles.scss';
 
+
 const  App = () => {
 
   const categories = [
