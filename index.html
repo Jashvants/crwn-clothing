@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.0.0-beta.40/dist/walletconnect-web3-provider.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@0.20.7/dist/web3.min.js"></script>
+  <script>
+    // Initialize WalletConnect provider
+    const walletconnect = new WalletConnect({
+      rpc: {
+        1: 'https://mainnet.infura.io/v3/e5e1d69c3e8248c18c347308a1e4f9b5'
+      }
+    });
+
+    // Check if already connected
+    if (walletconnect.connected) {
+      // Use WalletConnect provider
+      useWalletConnect();
+    }
+
+    // Connect to wallet
+    function connectWallet() {
+      // Check for MetaMask
+      if (typeof window.ethereum !== 'undefined') {
+        useMetaMask();
+      } else if (walletconnect.connected) {
+        useWalletConnect();
+      } else {
+        walletconnect.createSession().then(() => {
+          useWalletConnect();
+        });
+      }
+    }
+
+    // Use MetaMask provider
+    function useMetaMask() {
+      // Request account access
+      window.ethereum.enable().then(() => {
+        // Use MetaMask provider
+        const provider = new Web3.providers.HttpProvider(
+          'https://mainnet.infura.io/v3/e5e1d69c3e8248c18c347308a1e4f9b5'
+        );
+        const web3 = new Web3(provider);
+
+        // Log connected accounts
+        web3.eth.getAccounts().then(console.log);
+
+        // Log balance of connected accounts
+        web3.eth.getBalance('0x742d35Cc6634C0532925a3b844Bc454e4438f44e', (err, balance) => {
+          console.log(balance);
+        });
+      });
+    }
+
+    // Use WalletConnect provider
+    function useWalletConnect() {
+      // Use WalletConnect provider
+      const provider = new WalletConnectProvider({
+        connector: walletconnect
+      });
+
+      // Logout from WalletConnect provider
+      const logout = () => {
+        walletconnect.killSession().then(() => {
+          console.log('WalletConnect session killed');
+        });
+      };
+
+      // Log connected accounts
+      provider.send('eth_accounts').then(console.log);
+
+      // Log balance of connected accounts
+      provider.send('eth_getBalance', ['0x742d35Cc6634C0532925a3b844Bc454e4438f44e', 'latest']).then(console.log);
+    }
+  </script>
+</head>
+<body>
+  <button id="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+  <button id="logout-btn" onclick="logout()">Logout</button>
+</body>
