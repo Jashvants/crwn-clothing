@@ -21,7 +21,7 @@ const Navigation = ()=>{
             SHOP
 
           </Link>
-          <Link className="nav-link" to='/signIn'>
+          <Link className="nav-link" to='/auth'>
             SignIn
 
           </Link>

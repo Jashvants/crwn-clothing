@@ -13,6 +13,7 @@
     "react-scripts": "5.0.1",
     "react-svg": "^16.0.0",
     "react-svg-inline": "^2.1.1",
+    "react-toastify": "^9.1.1",
     "sass": "^1.57.1",
     "svg-inline-react": "^3.2.1",
     "web-vitals": "^2.1.4"

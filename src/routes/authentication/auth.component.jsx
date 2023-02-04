@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { getRedirectResult } from "firebase/auth";
+
 
 import SignUpForm from "../../Component/sign-up/sign-up-form.component";
+import SignInForm from "../../Component/sign-in-form/sign-in-form.component";
+import "./auth.styles.scss";
 
 import {
     auth,
@@ -11,7 +12,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import { async } from "@firebase/util";
 
-const SignIn = () => {
+const Authentication = () => {
      
 
     //This is just for our learning purpose so i commentedthisout 
@@ -33,14 +34,13 @@ const SignIn = () => {
     };
 
     return (
-        <div>
-            <h1>Sign In Page</h1>
-            <button onClick={logGoogleUser}>SIGN IN With Google Account</button>
-            {/* <button onClick={signInWithGoogleRedirect}>SIGN IN With Google Redirect</button> */}
+        <div className="authentication-container">
+       
+            <SignInForm/>
             <SignUpForm/>
         </div>
     );
 };
 
 
-export default SignIn;
+export default Authentication;

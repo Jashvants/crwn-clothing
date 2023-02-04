@@ -19,7 +19,7 @@ const SignUpForm = ()=>{
     const { displayName,email,password,confirmPassword} =formFields; //destructing injavascrip s when we want any things we can fetch
  
 
-    console.log(formFields);
+    // console.log(formFields);
 
     const resetFomrField= ()=>{
         setFormFields(defaultFormFields);
